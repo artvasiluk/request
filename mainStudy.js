@@ -14,17 +14,17 @@ function findInWiki(value) {
       if (err) throw err;
 	  	  
 	  var dayBornStart = body.indexOf('Родившиеся ') + 11;
-	  var dayBornFin = body.indexOf('Родившиеся ', 2) - 2;
-	  var yearBornStart = body.indexOf('Родившиеся ', 3) + 10;
-	  var yearBornFin = body.indexOf('Родившиеся ', 4) -  2;
-	  var cityBornStart = body.indexOf('Родившиеся ', 5) + 10;
-	  var cityBornFin = body.indexOf('Родившиеся ', 6) - 2;
+	  var dayBornFin = body.indexOf('Родившиеся ', dayBornStart + 1) - 2;
+	  var yearBornStart = body.indexOf('Родившиеся ', dayBornFin + 1) + 10;
+	  var yearBornFin = body.indexOf('Родившиеся ', yearBornStart + 1) -  2;
+	  var cityBornStart = body.indexOf('Родившиеся ', yearBornFin + 1) + 10;
+	  var cityBornFin = body.indexOf('Родившиеся ', cityBornStart + 1) - 2;
 	  var dayDieStart = body.indexOf('Умершие ') + 8;
-	  var dayDieFin = body.indexOf('Умершие ', 2) - 2;
-	  var yearDieStart = body.indexOf('Умершие ', 3) + 7;
-	  var yearDieFin = body.indexOf('Умершие ', 4) - 2;
-	  var cityDieStart = body.indexOf('Умершие ', 5) + 7;
-	  var cityDieFin = body.indexOf('Умершие ', 6) - 2;
+	  var dayDieFin = body.indexOf('Умершие ', dayDieStart + 1) - 2;
+	  var yearDieStart = body.indexOf('Умершие ', dayDieFin + 1) + 7;
+	  var yearDieFin = body.indexOf('Умершие ', yearDieStart + 1) - 2;
+	  var cityDieStart = body.indexOf('Умершие ', yearDieFin + 1) + 7;
+	  var cityDieFin = body.indexOf('Умершие ', cityDieStart + 1) - 2;
 	  
 	  var dayBorn = body.substring(dayBornStart, dayBornFin);
 	  var yearBorn = body.substring(yearBornStart, yearBornFin);
