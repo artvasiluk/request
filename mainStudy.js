@@ -5,7 +5,7 @@ var func2 =          function(x) { return x * 2; }
 
 console.log(func(4, 5));
 
-function findInWiki(value) {
+function findInWikiRu(value) {
     var options = {
           method: 'GET',
           uri: 'https://ru.wikipedia.org/wiki/' + encodeURIComponent(value)
@@ -13,13 +13,27 @@ function findInWiki(value) {
     request(options, (err, response, body) => {
       if (err) throw err;
 	  	  
-	  console.log(bornDie(body));
+	  console.log(bornDieRu(body));
 	  // найти когда и где родился и умер и вывести на экран
 	  
     });
 }
 
-function bornDie(body) {
+function findInWikiEn(value) {
+    var options = {
+          method: 'GET',
+          uri: 'https://en.wikipedia.org/wiki/' + encodeURIComponent(value)
+        };
+    request(options, (err, response, body) => {
+      if (err) throw err;
+	  	  
+	  console.log(bornDieEn(body));
+	  // найти когда и где родился и умер и вывести на экран
+	  
+    });
+}
+
+function bornDieRu(body) {
 	  var born = 'Родившиеся ';
 	  var dayBornStart = body.indexOf(born) + born.length;
 	  var dayBornFin = body.indexOf('"', dayBornStart + 1);
@@ -51,7 +65,39 @@ function bornDie(body) {
 	  }	  
 }
 
-findInWiki('Щуко,_Владимир_Алексеевич');
-findInWiki('Гельфрейх,_Владимир_Георгиевич');
+function En(body) {
+	  var born = '</span>)</span>';
+	  var dayBornStart = body.indexOf(born) + born.length;
+	  var dayBornFin = body.indexOf('<', dayBornStart + 1);
+	  
+	  /*var city = '"row">Home'
+	  var cityBornStart = body.indexOf(city) + city.length; 		
+	  var cityBornFin = body.indexOf('"', cityBornStart + 1);*/
+
+	  var dayBorn = body.substring(dayBornStart, dayBornFin);
+	  dayBorn.trim();
+	  //var cityBorn = body. substring(cityBornStart, cityBornFin);
+	  var die = '"row">Died</th>';
+	  
+	  if (body.indexOf(die) === -1) {
+		return result1 = 'Was born ' + dayBorn + cityBorn + '. Alive.';
+	  } else {
+		  var dayDieStart = body.indexOf(die) + die.length + 4;
+		  var dayDieFin = body.indexOf('<', dayDieStart + 1);
+		  
+		  /*var cityDieStart = body.indexOf(die, yearDieFin + 1) + die.length - 1;
+		  var cityDieFin = body.indexOf('"', cityDieStart + 1);*/
+		  
+		  var dayDie = body.substring(dayDieStart, dayDieFin);
+		  dayDie.trim();
+		  
+		  /*var cityDie = body.substring(cityDieStart, cityDieFin);*/
+		  return result2 = 'Was born ' + dayBorn + cityBorn + '. Died ' + dayDie + cityDie + '.';
+	  }	  
+}
+
+
+findInWiki('ru', 'Щуко,_Владимир_Алексеевич');
+findInWiki('en', 'Peter_the_Great');
 findInWiki('Колли,_Николай_Джемсович');
 findInWiki('Кернес,_Геннадий_Адольфович');
