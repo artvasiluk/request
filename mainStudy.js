@@ -12,19 +12,20 @@ function findInWiki(value) {
         };
     request(options, (err, response, body) => {
       if (err) throw err;
-	  	  
-	  var dayBornStart = body.indexOf('Родившиеся ') + 11;
-	  var dayBornFin = body.indexOf('"', dayBornStart + 1);
-	  var yearBornStart = body.indexOf('Родившиеся ', dayBornFin + 1) + 10;
-	  var yearBornFin = body.indexOf('"', yearBornStart + 1);
-	  var cityBornStart = body.indexOf('Родившиеся ', yearBornFin + 1) + 10;
-	  var cityBornFin = body.indexOf('"', cityBornStart + 1);
 	  
-	  var dayDieStart = body.indexOf('Умершие ') + 8;
+	  var born = 'Родившиеся ';
+	  var dayBornStart = body.indexOf(born) + born.length;
+	  var dayBornFin = body.indexOf('"', dayBornStart + 1);
+	  var yearBornStart = body.indexOf(born, dayBornFin + 1) + born.length - 1;
+	  var yearBornFin = body.indexOf('"', yearBornStart + 1);
+	  var cityBornStart = body.indexOf(born, yearBornFin + 1) + born.length - 1;
+	  var cityBornFin = body.indexOf('"', cityBornStart + 1);
+	  var die = 'Умершие ';
+	  var dayDieStart = body.indexOf(die) + die.length;
 	  var dayDieFin = body.indexOf('"', dayDieStart + 1);
-	  var yearDieStart = body.indexOf('Умершие ', dayDieFin + 1) + 7;
+	  var yearDieStart = body.indexOf(die, dayDieFin + 1) + die.length - 1;
 	  var yearDieFin = body.indexOf('"', yearDieStart + 1);
-	  var cityDieStart = body.indexOf('Умершие ', yearDieFin + 1) + 7;
+	  var cityDieStart = body.indexOf(die, yearDieFin + 1) + die.length - 1;
 	  var cityDieFin = body.indexOf('"', cityDieStart + 1);
 	  
 	  var dayBorn = body.substring(dayBornStart, dayBornFin);
