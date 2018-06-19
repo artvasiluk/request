@@ -14,18 +14,18 @@ function findInWiki(value) {
       if (err) throw err;
 	  	  
 	  var dayBornStart = body.indexOf('Родившиеся ') + 11;
-	  var dayBornFin = body.indexOf('Родившиеся ', dayBornStart + 1) - 3;
+	  var dayBornFin = body.indexOf('"', dayBornStart + 1);
 	  var yearBornStart = body.indexOf('Родившиеся ', dayBornFin + 1) + 10;
-	  var yearBornFin = body.indexOf('Родившиеся ', yearBornStart + 1) -  3;
+	  var yearBornFin = body.indexOf('"', yearBornStart + 1);
 	  var cityBornStart = body.indexOf('Родившиеся ', yearBornFin + 1) + 10;
-	  var cityBornFin = body.indexOf('Родившиеся ', cityBornStart + 1) - 3;
+	  var cityBornFin = body.indexOf('"', cityBornStart + 1);
 	  
 	  var dayDieStart = body.indexOf('Умершие ') + 8;
-	  var dayDieFin = body.indexOf('Умершие ', dayDieStart + 1) - 2;
+	  var dayDieFin = body.indexOf('"', dayDieStart + 1);
 	  var yearDieStart = body.indexOf('Умершие ', dayDieFin + 1) + 7;
-	  var yearDieFin = body.indexOf('Умершие ', yearDieStart + 1) - 2;
+	  var yearDieFin = body.indexOf('"', yearDieStart + 1);
 	  var cityDieStart = body.indexOf('Умершие ', yearDieFin + 1) + 7;
-	  var cityDieFin = body.indexOf('Умершие ', cityDieStart +1) - 2;
+	  var cityDieFin = body.indexOf('"', cityDieStart + 1);
 	  
 	  var dayBorn = body.substring(dayBornStart, dayBornFin);
 	  var yearBorn = body.substring(yearBornStart, yearBornFin);
@@ -34,7 +34,7 @@ function findInWiki(value) {
 	  var yearDie = body.substring(yearDieStart, yearDieFin);
 	  var cityDie = body.substring(cityDieStart, cityDieFin);
 	  
-	  var result = 'Родился ' + dayBorn + yearBorn; //+ cityBorn + '. Умер' + dayDie + yearDie + cityDie;
+	  var result = 'Родился ' + dayBorn + yearBorn + cityBorn + '. Умер ' + dayDie + yearDie + cityDie + '.';
 	  
       console.log(result);
 	  // найти когда и где родился и умер и вывести на экран
