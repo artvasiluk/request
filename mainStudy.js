@@ -5848,7 +5848,7 @@ function findInWikiRu(value) {
     request(options, (err, response, body) => {
       if (err) throw err;
 	  	  
-	  console.log(bornDieRu(body));
+	  console.log(Ru(body));
 	  // найти когда и где родился и умер и вывести на экран
 	  
     });
@@ -5930,10 +5930,21 @@ function En(body) {
 		  return result2 = 'Was born ' + dayBorn + ', '+ cityBorn + '. Died ' + dayDie + ', '+ cityDie + '.';
 	  }	  
 }
-findInWikiEn('Jimi_Hendrix')
+function findInWiki(lang, name) {
+	if (lang === 'En'){
+		findInWikiEn(name);
+	} else if (lang === 'Ru'){
+		findInWikiRu(name);
+	} else {"I don't know this language."}
+}
+
+findInWikiEn('Jimi_Hendrix');
+findInWikiEn('Albert_Einstein');
+findInWikiEn('Bob_Marley');
+findInWikiEn('Takeshi_Kitano');
 //console.log(En(source));
 
-//findInWiki('ru', 'Щуко,_Владимир_Алексеевич');
-//findInWiki('en', 'Peter_the_Great');
+findInWiki('Ru', 'Щуко,_Владимир_Алексеевич');
+findInWiki('En', 'Peter_the_Great');
 //findInWiki('Колли,_Николай_Джемсович');
 //findInWiki('Кернес,_Геннадий_Адольфович');
