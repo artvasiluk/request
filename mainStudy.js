@@ -19,21 +19,30 @@ function findDirectors () {
         };
     request(options, (err, response, body) => {
       if (err) throw err;
-	  console.log(nameOne(body));
+	  nameList(body);
 
     });
 }
 
-function nameOne(body) {
+function nameList(body) {
 	var nameOf = '<li><a href="/wiki/';
-	var firstIndex = body.indexOf(nameOf);
-	if (firstIndex !== -1) {
-		var nameStart = firstIndex + nameOf.length;
+	var index = body.indexOf(nameOf);
+	var list = [];
+	while (index !== -1) {
+		var nameStart = index + nameOf.length;
 		var nameFin = body.indexOf('"', nameStart + 1);
 		var name = body.substring(nameStart, nameFin);
+		var category1 = '%D0%9A%D0%B0%D1%82%D0%B5%D0%B3%D0%BE%D1%80%D0%B8%D1%8F:%D0%9A%D0%B0%D1%82%D0%B5%D0%B3%D0%BE%D1%80%D0%B8%D0%B8_%D0%BF%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%BB%D0%B8%D0%B9_%D0%BF%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D1%83';
+		var category2 = '%D0%9A%D0%B0%D1%82%D0%B5%D0%B3%D0%BE%D1%80%D0%B8%D1%8F:%D0%A0%D0%B5%D0%B6%D0%B8%D1%81%D1%81%D1%91%D1%80%D1%8B';
 		
-		return name;
+		if (name !== category1 && name !== category2) {
+			list.push(name);
+			console.log(decodeURIComponent(name));		
+		}
+		index = body.indexOf(nameOf, nameFin + 1);
+		
 	}
+	return list;
 }
 
 findDirectors();
